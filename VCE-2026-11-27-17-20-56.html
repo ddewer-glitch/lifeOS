@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#EAECEF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LifeOS">
+<title>LifeOS — Focus. Plan. Achieve.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap&subset=cyrillic" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'] },
+        colors: {
+          emerald: '#10B981',
+          blue: '#3B82F6',
+          amber: '#F59E0B',
+          red: '#EF4444'
+        }
+      }
+    }
+  };
+</script>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: #F4F5F7;
+    color: #111318;
+  }
+  body.dark-mode {
+    background: #0B0D10;
+    color: #F4F6F8;
+  }
+  .tabnum { font-variant-numeric: tabular-nums; }
+
+  /* Light 3D Wave Architectural Surface (Focus & Ideas) */
+  .surface-light {
+    background-color: #F4F5F7;
+    background-image:
+      radial-gradient(110% 60% at 85% 5%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 60%),
+      radial-gradient(90% 55% at 15% 18%, rgba(212, 216, 224, 0.75) 0%, rgba(212, 216, 224, 0) 65%),
+      linear-gradient(155deg, #E4E7EC 0%, #F1F2F5 42%, #F6F7F9 100%);
+  }
+
+  /* Dark 3D Wave Architectural Surface (Capital) */
+  .surface-dark {
+    background-color: #0B0D10;
+    background-image:
+      radial-gradient(110% 55% at 80% 8%, rgba(16, 185, 129, 0.14) 0%, rgba(11, 13, 16, 0) 60%),
+      radial-gradient(100% 50% at 10% 25%, rgba(36, 42, 50, 0.65) 0%, rgba(11, 13, 16, 0) 65%),
+      linear-gradient(165deg, #161A20 0%, #0D1014 55%, #090B0E 100%);
+  }
+
+  /* Reference Dark Glass Timer Card on Light Focus Screen */
+  .focus-timer-glass {
+    background:
+      radial-gradient(120% 100% at 15% 15%, rgba(56, 64, 78, 0.65) 0%, rgba(24, 27, 32, 0.94) 55%),
+      linear-gradient(145deg, #272B33 0%, #14171C 100%);
+    box-shadow: 0 20px 38px -12px rgba(17, 19, 24, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 26px;
+  }
+
+  /* Light Frosted Card & Rows */
+  .light-card {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 22px -6px rgba(17, 19, 24, 0.06);
+  }
+  .light-pill-input {
+    background: rgba(226, 229, 235, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+  .light-chip {
+    background: rgba(226, 229, 235, 0.72);
+    color: #4B5563;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all .15s ease;
+    white-space: nowrap;
+  }
+  .light-chip[aria-pressed="true"] {
+    background: #181A1F;
+    color: #FFFFFF;
+  }
+
+  /* Dark Glass Tiles (Capital Screen) */
+  .dark-tile {
+    background: rgba(26, 30, 36, 0.76);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+  .dark-tile:active {
+    transform: scale(0.97);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  /* Floating Omni-Bar Pill */
+  .omni-pill {
+    background: rgba(26, 29, 35, 0.94);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+  }
+  .mic-active {
+    background: #EF4444 !important;
+    color: #fff !important;
+    animation: micPulse 1.2s infinite;
+  }
+  @keyframes micPulse {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  }
+
+  /* Adaptive Bottom Navigation Bar + Clearance for APK Builder Watermark */
+  .nav-light {
+    background: rgba(244, 245, 247, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(17, 19, 24, 0.06);
+    color: #8E95A2;
+  }
+  .nav-light .nav-btn[aria-selected="true"] { color: #111318; }
+
+  .nav-dark {
+    background: rgba(13, 16, 20, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    color: #6B7280;
+  }
+  .nav-dark .nav-btn[aria-selected="true"] { color: #FFFFFF; }
+
+  .nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 7px 0;
+    font-size: 11px;
+    font-weight: 600;
+    transition: color .15s;
+  }
+  .nav-btn[aria-selected="true"] .nav-dot { opacity: 1; }
+  .nav-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 99px;
+    background: #3B82F6;
+    opacity: 0;
+    transition: opacity .15s;
+  }
+
+  .inp-modal {
+    width: 100%;
+    background: #161A20;
+    color: #F4F6F8;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 11px 14px;
+    font-size: 15px;
+    font-weight: 600;
+    outline: none;
+  }
+  .inp-modal:focus { border-color: rgba(255, 255, 255, 0.3); }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  @keyframes slideUp { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+  .anim-in { animation: slideUp .2s ease-out; }
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div class="mx-auto max-w-md w-full min-h-screen relative">
+
+  <!-- =====================================================================
+       TAB 1: ФОКУС (LIGHT 3D ARCHITECTURAL THEME + DARK GLASS TIMER)
+       ===================================================================== -->
+  <section id="viewFocus" class="tab-view surface-light min-h-screen relative overflow-hidden pb-44">
+    <!-- Decorative SVG 3D Silk Wave Overlay -->
+    <svg class="absolute top-0 inset-x-0 w-full h-72 pointer-events-none opacity-65" viewBox="0 0 400 280" fill="none" preserveAspectRatio="none">
+      <path d="M-40 160 C 90 110, 210 210, 440 80 L 440 0 L -40 0 Z" fill="url(#waveL1)"/>
+      <path d="M120 0 C 170 120, 290 140, 420 240 L 420 0 Z" fill="url(#waveL2)"/>
+      <defs>
+        <linearGradient id="waveL1" x1="0" y1="0" x2="400" y2="200" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#D1D5DB" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="waveL2" x1="150" y1="0" x2="380" y2="240" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#9CA3AF" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#F3F4F6" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div class="relative z-10 px-5" style="padding-top: max(38px, calc(env(safe-area-inset-top) + 16px))">
+      <!-- Top Bar -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="font-extrabold text-[17px] tracking-tight text-[#111318]">LifeOS</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="openStatsBtn" class="px-3 py-1.5 rounded-full bg-white/75 border border-white text-xs font-semibold text-[#374151] shadow-sm active:scale-95 transition">
+            Сводка
+          </button>
+          <button id="openSettingsBtn" class="w-9 h-9 rounded-full bg-white/80 border border-white grid place-items-center text-[#111318] shadow-sm active:scale-95 transition" aria-label="Настройки">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Date & Large Clock -->
+      <div class="mt-6">
+        <div id="focusDate" class="text-[13px] font-medium text-[#4B5563]">Пн, 21 Апреля</div>
+        <div id="focusClock" class="text-[54px] leading-none font-bold tracking-tight text-[#111318] tabnum mt-1">09:41</div>
+        <div class="flex items-center gap-2 mt-2.5">
+          <span class="w-2 h-2 rounded-full bg-[#374151]"></span>
+          <span class="text-[13px] font-medium text-[#374151]">Фокус. Сегодня</span>
+          <span id="focusTodayMinutes" class="text-xs font-semibold text-[#6B7280] tabnum">· 0 мин</span>
+        </div>
+      </div>
+
+      <!-- Dark Frosted Glass Focus Card (Reference Signature Element) -->
+      <div class="focus-timer-glass p-5 mt-6 text-white">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span id="timerDot" class="w-2.5 h-2.5 rounded-full bg-blue"></span>
+            <span class="text-[13px] font-semibold text-white/90">Фокус-сессия</span>
+          </div>
+          <!-- Subtle Duration Switcher -->
+          <div class="flex items-center gap-1">
+            <button type="button" data-dur="15" class="dur-btn px-2 py-0.5 rounded-md text-[11px] font-semibold text-white/45 hover:text-white">15м</button>
+            <button type="button" data-dur="25" class="dur-btn px-2 py-0.5 rounded-md text-[11px] font-semibold bg-white/15 text-white">25м</button>
+            <button type="button" data-dur="45" class="dur-btn px-2 py-0.5 rounded-md text-[11px] font-semibold text-white/45 hover:text-white">45м</button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-3">
+          <div>
+            <div id="timerDisplay" class="text-[48px] leading-none font-bold tracking-tight tabnum">25:00</div>
+            <!-- Compact Track Selector matching "НМТ • Подготовка ›" -->
+            <button type="button" id="cycleFocusSkillBtn" class="flex items-center justify-between w-48 mt-3 text-left group">
+              <span id="focusSkillLabel" class="text-[13px] font-medium text-white/80 group-hover:text-white">НМТ • Подготовка</span>
+              <span class="text-white/50 text-sm">›</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button id="timerResetBtn" class="hidden w-9 h-9 rounded-full bg-white/10 text-white/70 grid place-items-center" aria-label="Сброс">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            </button>
+            <button id="timerToggleBtn" class="w-14 h-14 rounded-full bg-white text-[#111318] grid place-items-center shadow-lg active:scale-95 transition" aria-label="Старт">
+              <svg id="timerPlayIcon" class="w-6 h-6 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              <svg id="timerPauseIcon" class="w-6 h-6 hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tasks Today Section -->
+      <div class="mt-7">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <h2 class="text-[16px] font-bold text-[#111318]">Задачи на сегодня</h2>
+            <button id="openAddTaskModal" class="w-6 h-6 rounded-full bg-[#111318]/10 text-[#111318] grid place-items-center text-sm font-bold active:scale-90 transition">+</button>
+          </div>
+          <span id="tasksCounter" class="text-[13px] font-semibold text-[#4B5563] tabnum">0 / 3</span>
+        </div>
+
+        <div id="tasksList" class="divide-y divide-black/[0.06]"></div>
+      </div>
+
+      <!-- Level & XP Card (Reference Bottom Card Style) -->
+      <div class="light-card rounded-3xl p-4 mt-6 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3.5 min-w-0 flex-1">
+          <!-- Semi-ring badge -->
+          <div class="relative w-12 h-12 rounded-2xl bg-[#181A1F] text-white grid place-items-center shrink-0">
+            <svg class="w-9 h-9 -rotate-90" viewBox="0 0 36 36">
+              <circle cx="18" cy="18" r="14" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="3"/>
+              <circle id="lvlMiniRing" cx="18" cy="18" r="14" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round" stroke-dasharray="88" stroke-dashoffset="44"/>
+            </svg>
+            <span id="lvlBadgeNum" class="absolute text-[11px] font-extrabold tabnum">1</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="text-[11px] font-medium text-[#6B7280]">Уровень</div>
+            <div id="lvlTitle" class="text-[17px] font-extrabold text-[#111318] leading-tight">LVL 1</div>
+            <div class="flex items-center gap-2 mt-1">
+              <span id="xpProgressText" class="text-[11px] font-semibold text-[#6B7280] tabnum">0 / 500 XP</span>
+            </div>
+            <div class="w-full h-1.5 rounded-full bg-black/[0.08] overflow-hidden mt-1.5">
+              <div id="xpBar" class="h-full bg-blue rounded-full transition-all duration-500" style="width: 10%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-right shrink-0">
+          <div id="xpTodayGain" class="text-xs font-bold text-emerald tabnum">+0 XP</div>
+          <!-- Mini equalizer bars like reference -->
+          <div class="flex items-end justify-end gap-1 h-5 mt-2">
+            <span class="w-1 h-2 rounded-full bg-emerald/40"></span>
+            <span class="w-1 h-3.5 rounded-full bg-emerald/70"></span>
+            <span class="w-1 h-5 rounded-full bg-emerald"></span>
+            <span class="w-1 h-3 rounded-full bg-emerald/60"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       TAB 2: КАПИТАЛ (DARK 3D ARCHITECTURAL THEME + SINGLE-ROW WALLETS)
+       ===================================================================== -->
+  <section id="viewCapital" class="tab-view hidden surface-dark min-h-screen text-[#F4F6F8] relative overflow-hidden pb-44">
+    <div class="relative z-10 px-5" style="padding-top: max(38px, calc(env(safe-area-inset-top) + 16px))">
+      <!-- Top Header -->
+      <div class="flex items-center justify-between">
+        <div class="w-8 h-8 rounded-xl bg-white/[0.06] border border-white/10 grid place-items-center text-white/90">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="refreshRatesBtn" class="px-2.5 py-1 rounded-full bg-white/[0.06] border border-white/10 text-[11px] font-semibold text-white/75 flex items-center gap-1.5">
+            <span id="rateStatusDot" class="w-1.5 h-1.5 rounded-full bg-emerald"></span>
+            <span id="ratesBadge" class="tabnum">€ 49.3 · $ 45.0</span>
+          </button>
+          <button id="openFinanceStatsBtn" class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 grid place-items-center text-white/80" aria-label="Аналитика">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </button>
+          <button id="toggleHideBalance" class="w-8 h-8 rounded-full bg-white/[0.06] border border-white/10 grid place-items-center text-white/80" aria-label="Скрыть">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Total Capital -->
+      <div class="mt-5">
+        <div class="text-[13px] font-medium text-white/60">Мой капитал</div>
+        <div id="totalCapitalDisplay" class="text-[44px] leading-none font-bold tracking-tight text-white tabnum mt-1.5">29 947 ₴</div>
+        <div class="flex items-center gap-2 mt-2">
+          <span id="capitalTrendBadge" class="text-[13px] font-semibold text-emerald tabnum">↑ +0.0% за неделю</span>
+          <span id="ratesUpdatedTime" class="text-[11px] text-white/40">· НБУ</span>
+        </div>
+      </div>
+
+      <!-- Reference Smooth Chart with Vertical Marker Line -->
+      <div class="mt-3 h-24 w-full relative" id="sparklineBox"></div>
+
+      <!-- Single-Row Wallets Strip (UAH, EUR, USD, +) matching Reference -->
+      <div class="grid grid-cols-[1fr_1fr_1fr_46px] gap-2 mt-3">
+        <button type="button" id="tileUahBtn" class="dark-tile rounded-2xl p-3 text-left transition">
+          <div class="text-sm font-bold text-white/90">₴</div>
+          <div id="tileUahVal" class="text-[15px] font-bold text-white tabnum mt-2 truncate">24 067</div>
+          <div class="text-[10px] font-semibold text-white/45 mt-0.5">UAH</div>
+        </button>
+
+        <button type="button" data-edit-wallet="eur" class="dark-tile rounded-2xl p-3 text-left transition">
+          <div class="text-sm font-bold text-blue">€</div>
+          <div id="tileEurVal" class="text-[15px] font-bold text-white tabnum mt-2 truncate">100</div>
+          <div class="text-[10px] font-semibold text-white/45 mt-0.5">EUR</div>
+        </button>
+
+        <button type="button" data-edit-wallet="usd" class="dark-tile rounded-2xl p-3 text-left transition">
+          <div class="text-sm font-bold text-amber">$</div>
+          <div id="tileUsdVal" class="text-[15px] font-bold text-white tabnum mt-2 truncate">21</div>
+          <div class="text-[10px] font-semibold text-white/45 mt-0.5">USD</div>
+        </button>
+
+        <button type="button" id="openAddTxModal" class="dark-tile rounded-2xl grid place-items-center text-white/80 text-xl font-light transition" aria-label="Новая операция">
+          +
+        </button>
+      </div>
+
+      <!-- Goal Card (Reference Ring + Linear Bar) -->
+      <div class="dark-tile rounded-3xl p-4 mt-4 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3.5 min-w-0 flex-1">
+          <div class="relative w-12 h-12 shrink-0 grid place-items-center">
+            <svg class="w-12 h-12 -rotate-90" viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="19" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4.5"/>
+              <circle id="goalRingCircle" cx="24" cy="24" r="19" fill="none" stroke="#10B981" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="119.3" stroke-dashoffset="60"/>
+            </svg>
+            <svg class="w-4 h-4 text-white/90 absolute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center justify-between">
+              <span id="goalNameDisplay" class="text-[13px] font-bold text-white truncate">Цель: 50 000 ₴</span>
+              <span id="goalPctDisplay" class="text-[13px] font-bold text-white tabnum ml-2">59.9%</span>
+            </div>
+            <div class="w-full h-1.5 rounded-full bg-white/10 overflow-hidden mt-2">
+              <div id="goalLinearBar" class="h-full bg-emerald rounded-full transition-all duration-500" style="width: 59.9%"></div>
+            </div>
+            <div class="flex items-center justify-between mt-1.5">
+              <span id="goalNumbersDisplay" class="text-[11px] text-white/50 tabnum">29 947 / 50 000 ₴</span>
+              <button id="editGoalModalBtn" class="text-[11px] text-white/50 hover:text-white">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Operations -->
+      <div class="mt-6">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-[15px] font-bold text-white">Последние операции</h2>
+          <button id="toggleAllTxBtn" class="text-xs font-medium text-white/60 hover:text-white">Все →</button>
+        </div>
+        <div id="txList" class="space-y-3"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================================
+       TAB 3: ИДЕИ (LIGHT 3D ARCHITECTURAL THEME + QUICK ACTIONS)
+       ===================================================================== -->
+  <section id="viewIdeas" class="tab-view hidden surface-light min-h-screen text-[#111318] relative overflow-hidden pb-44">
+    <!-- Decorative SVG 3D Wave -->
+    <svg class="absolute top-0 inset-x-0 w-full h-64 pointer-events-none opacity-60" viewBox="0 0 400 260" fill="none" preserveAspectRatio="none">
+      <path d="M-20 190 C 120 150, 260 60, 420 120 L 420 0 L -20 0 Z" fill="url(#waveIdeas)"/>
+      <defs>
+        <linearGradient id="waveIdeas" x1="0" y1="0" x2="400" y2="200" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#D1D5DB" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <div class="relative z-10 px-5" style="padding-top: max(38px, calc(env(safe-area-inset-top) + 16px))">
+      <div class="flex items-center justify-between">
+        <div class="w-8 h-8 rounded-xl bg-white/75 border border-white grid place-items-center text-[#111318] shadow-sm">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <span id="ideasTotalBadge" class="text-xs font-semibold text-[#6B7280] tabnum">1</span>
+      </div>
+
+      <h1 class="text-[36px] leading-[1.08] font-bold tracking-tight text-[#111318] mt-5">Парковка<br>идей</h1>
+      <p class="text-[13px] font-medium text-[#4B5563] mt-2">Сохраняй мысли. Превращай в планы.</p>
+
+      <!-- Capsule Input matching "+ Закинуть идею... [wave]" -->
+      <div class="light-pill-input rounded-2xl px-3.5 py-2.5 mt-5 flex items-center gap-2.5">
+        <button type="button" id="quickIdeaAddBtn" class="text-[#6B7280] text-lg font-medium shrink-0">+</button>
+        <input id="quickIdeaInput" class="bg-transparent text-[#111318] text-sm font-medium flex-1 min-w-0 outline-none placeholder:text-[#6B7280]" placeholder="Закинуть идею..." autocomplete="off">
+        <button type="button" id="ideaInlineMicBtn" class="w-8 h-8 rounded-xl bg-black/[0.06] text-[#111318] grid place-items-center shrink-0" aria-label="Голос">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20"/><path d="M8 6v12"/><path d="M16 6v12"/><path d="M4 10v4"/><path d="M20 10v4"/></svg>
+        </button>
+      </div>
+
+      <!-- Filter Chips -->
+      <div class="flex items-center gap-2 mt-4 overflow-x-auto no-scrollbar" id="ideaTagChips"></div>
+
+      <!-- My Ideas List -->
+      <div class="mt-6">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-[15px] font-bold text-[#111318]">Мои идеи</h2>
+          <span id="ideasCountRight" class="text-[13px] font-bold text-[#111318] tabnum">1</span>
+        </div>
+        <div id="ideasList" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Quick Actions Block (Reference Bottom 3 Tiles: Задача / Заметка / Проект) -->
+      <div class="mt-6">
+        <h3 class="text-[14px] font-bold text-[#111318] mb-2.5">Быстрые действия</h3>
+        <div class="grid grid-cols-3 gap-2.5">
+          <button type="button" data-qa="task" class="light-card rounded-2xl py-3.5 px-2 flex flex-col items-center justify-center gap-1.5 active:scale-95 transition">
+            <svg class="w-5 h-5 text-[#111318]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="4"/><polyline points="9 12 11 14 15 10"/></svg>
+            <span class="text-xs font-semibold text-[#111318]">Задача</span>
+          </button>
+          <button type="button" data-qa="note" class="light-card rounded-2xl py-3.5 px-2 flex flex-col items-center justify-center gap-1.5 active:scale-95 transition">
+            <svg class="w-5 h-5 text-[#111318]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            <span class="text-xs font-semibold text-[#111318]">Заметка</span>
+          </button>
+          <button type="button" data-qa="project" class="light-card rounded-2xl py-3.5 px-2 flex flex-col items-center justify-center gap-1.5 active:scale-95 transition">
+            <svg class="w-5 h-5 text-[#111318]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span class="text-xs font-semibold text-[#111318]">Проект</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<!-- =========================================================================
+     FLOATING OMNI-BAR ("Говори или пиши...")
+     ========================================================================= -->
+<div class="fixed inset-x-0 z-30 px-4 pointer-events-none" style="bottom: calc(env(safe-area-inset-bottom) + 84px)">
+  <div class="mx-auto max-w-md pointer-events-auto omni-pill rounded-full p-1.5 flex items-center gap-2.5">
+    <button id="omniMicBtn" class="w-10 h-10 rounded-full bg-white/10 text-white grid place-items-center shrink-0 transition" aria-label="Голос">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20"/><path d="M8 6v12"/><path d="M16 6v12"/><path d="M4 10v4"/><path d="M20 10v4"/></svg>
+    </button>
+    <input id="omniInput" class="bg-transparent text-white text-[13px] font-medium flex-1 min-w-0 outline-none placeholder:text-white/50" placeholder="Говори или пиши..." autocomplete="off">
+    <button id="omniSendBtn" class="w-10 h-10 rounded-full bg-white/15 text-white grid place-items-center shrink-0 active:scale-95 transition" aria-label="Отправить">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     BOTTOM NAVIGATION BAR (LIFTED ABOVE APK BUILDER WATERMARK)
+     ========================================================================= -->
+<nav id="bottomNav" class="fixed inset-x-0 bottom-0 z-30 nav-light" style="padding-bottom: max(22px, calc(env(safe-area-inset-bottom) + 18px))">
+  <div class="mx-auto max-w-md flex items-center justify-around pt-1 px-2">
+    <button class="nav-btn" data-target="viewFocus" aria-selected="true">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span>Фокус</span>
+      <span class="nav-dot"></span>
+    </button>
+    <button class="nav-btn" data-target="viewCapital" aria-selected="false">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span>Капитал</span>
+      <span class="nav-dot"></span>
+    </button>
+    <button class="nav-btn" data-target="viewIdeas" aria-selected="false">
+      <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+      <span>Идеи</span>
+      <span class="nav-dot"></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- =========================================================================
+     MODAL: UAH WALLETS BREAKDOWN (CASH vs CARD)
+     ========================================================================= -->
+<div id="uahWalletsModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="w-full max-w-sm bg-[#161A20] text-white border border-white/10 rounded-3xl p-5 anim-in">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-base font-bold">Счета в гривне (UAH)</h3>
+      <button id="closeUahModalBtn" class="text-white/50 p-1">✕</button>
+    </div>
+    <p class="text-xs text-white/55 mb-3">Нажми на счёт, чтобы изменить текущий остаток:</p>
+    <div class="space-y-2.5">
+      <button type="button" data-edit-wallet="cash" class="w-full p-3.5 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-between">
+        <span class="text-sm font-semibold">💵 Наличные (Готівка)</span>
+        <span id="modalCashVal" class="text-base font-bold text-emerald tabnum">0 ₴</span>
+      </button>
+      <button type="button" data-edit-wallet="card" class="w-full p-3.5 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center justify-between">
+        <span class="text-sm font-semibold">💳 Карта (Картка)</span>
+        <span id="modalCardVal" class="text-base font-bold text-emerald tabnum">0 ₴</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     MODAL: ADD / EDIT TRANSACTION
+     ========================================================================= -->
+<div id="txModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
+  <div class="w-full max-w-md bg-[#161A20] text-white border border-white/10 rounded-3xl p-5 anim-in">
+    <div class="flex items-center justify-between mb-4">
+      <h3 id="txModalTitle" class="text-base font-bold">Новая операция</h3>
+      <button id="closeTxModal" class="text-white/50 p-1 text-lg">✕</button>
+    </div>
+
+    <div class="grid grid-cols-2 gap-1.5 p-1 rounded-xl bg-black/40 border border-white/10 mb-3">
+      <button type="button" data-txtype="expense" class="tx-type-btn py-2 rounded-lg text-xs font-bold bg-red/20 text-red">− Расход</button>
+      <button type="button" data-txtype="income" class="tx-type-btn py-2 rounded-lg text-xs font-bold text-white/50">+ Доход</button>
+    </div>
+
+    <div class="grid grid-cols-4 gap-1.5 mb-3" id="modalWalletChips"></div>
+    <div class="flex flex-wrap gap-1.5 mb-3" id="modalCatChips"></div>
+
+    <div class="space-y-2.5">
+      <div class="relative">
+        <input id="txAmountInp" class="inp-modal text-xl font-bold tabnum pr-12" inputmode="decimal" placeholder="0">
+        <span id="txCurUnit" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 font-bold text-sm">₴</span>
+      </div>
+      <input id="txNoteInp" class="inp-modal text-sm" placeholder="Комментарий (кофе, шаурма, пополнение...)">
+    </div>
+
+    <button id="saveTxBtn" class="w-full mt-4 py-3.5 rounded-2xl bg-emerald text-[#06281E] font-bold text-sm active:scale-98 transition">Сохранить</button>
+    <button id="deleteTxBtn" class="hidden w-full mt-2 py-2 text-xs font-bold text-red">Удалить операцию</button>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     MODAL: EDIT WALLET BALANCE DIRECTLY
+     ========================================================================= -->
+<div id="walletModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="w-full max-w-sm bg-[#161A20] text-white border border-white/10 rounded-3xl p-5 anim-in">
+    <div class="flex items-center justify-between">
+      <h3 id="wmTitle" class="text-base font-bold">Счёт</h3>
+      <button id="closeWmBtn" class="text-white/50 p-1">✕</button>
+    </div>
+    <p class="text-xs text-white/55 mt-1">Введи актуальный остаток на счёте сейчас:</p>
+    <div class="relative mt-3">
+      <input id="wmAmountInp" class="inp-modal text-xl font-bold tabnum pr-12" inputmode="decimal">
+      <span id="wmCurUnit" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 font-bold">₴</span>
+    </div>
+    <div class="grid grid-cols-2 gap-2 mt-4">
+      <button id="cancelWmBtn" class="py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60">Отмена</button>
+      <button id="saveWmBtn" class="py-2.5 rounded-xl bg-emerald text-[#06281E] text-xs font-bold">Обновить</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     MODAL: EDIT GOAL
+     ========================================================================= -->
+<div id="goalModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="w-full max-w-sm bg-[#161A20] text-white border border-white/10 rounded-3xl p-5 anim-in">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-base font-bold">Финансовая цель</h3>
+      <button id="closeGmBtn" class="text-white/50 p-1">✕</button>
+    </div>
+    <div class="space-y-2.5">
+      <input id="gmNameInp" class="inp-modal text-sm" placeholder="Название цели (напр. 100 000 ₴ / MacBook)">
+      <div class="relative">
+        <input id="gmTargetInp" class="inp-modal font-bold tabnum pr-10" inputmode="decimal" placeholder="100000">
+        <span class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 font-bold">₴</span>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-2 mt-4">
+      <button id="cancelGmBtn" class="py-2.5 rounded-xl border border-white/10 text-xs font-bold text-white/60">Отмена</button>
+      <button id="saveGmBtn" class="py-2.5 rounded-xl bg-emerald text-[#06281E] text-xs font-bold">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     MODAL: ADD TASK
+     ========================================================================= -->
+<div id="taskModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="w-full max-w-sm bg-[#161A20] text-white border border-white/10 rounded-3xl p-5 anim-in">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-base font-bold">Новая задача</h3>
+      <button id="closeTmBtn" class="text-white/50 p-1">✕</button>
+    </div>
+    <input id="tmTitleInp" class="inp-modal text-sm mb-3" placeholder="Что нужно сделать?">
+    <div class="flex flex-wrap gap-1.5 mb-3" id="tmSkillChips"></div>
+    <div class="flex gap-1.5 mb-4" id="tmXpChips">
+      <button type="button" data-xp="25" class="px-3 py-1 rounded-full bg-white/10 text-xs font-semibold">+25 XP</button>
+      <button type="button" data-xp="50" class="px-3 py-1 rounded-full bg-blue text-white text-xs font-semibold">+50 XP</button>
+      <button type="button" data-xp="100" class="px-3 py-1 rounded-full bg-white/10 text-xs font-semibold">+100 XP</button>
+    </div>
+    <button id="saveTmBtn" class="w-full py-3 rounded-xl bg-blue text-white text-xs font-bold">Добавить в Фокус</button>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     MODAL: ANALYTICS & WEEKLY SUMMARY
+     ========================================================================= -->
+<div id="analyticsModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
+  <div class="w-full max-w-md bg-[#161A20] text-white border border-white/10 rounded-3xl p-5 max-h-[85vh] overflow-y-auto anim-in">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-base font-bold">Сводка и Аналитика</h3>
+      <button id="closeAnalyticsBtn" class="text-white/50 p-1">✕</button>
+    </div>
+
+    <div class="p-3.5 rounded-2xl bg-black/35 border border-white/10 mb-4">
+      <div class="text-[11px] font-bold text-white/50 uppercase tracking-wider mb-2.5">За последние 7 дней</div>
+      <div class="grid grid-cols-3 gap-2 text-center">
+        <div class="p-2 rounded-xl bg-white/[0.04]">
+          <div id="wrFocusHrs" class="text-base font-bold text-blue tabnum">0 ч</div>
+          <div class="text-[10px] text-white/55 mt-0.5">Фокус</div>
+        </div>
+        <div class="p-2 rounded-xl bg-white/[0.04]">
+          <div id="wrTasksDone" class="text-base font-bold text-white tabnum">0</div>
+          <div class="text-[10px] text-white/55 mt-0.5">Задач</div>
+        </div>
+        <div class="p-2 rounded-xl bg-white/[0.04]">
+          <div id="wrNetMoney" class="text-base font-bold text-emerald tabnum">0 ₴</div>
+          <div class="text-[10px] text-white/55 mt-0.5">Сальдо</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-xs font-bold text-white/50 uppercase tracking-wider mb-2.5">Расходы по категориям (30 дн.)</div>
+    <div id="catBreakdownBox" class="space-y-2.5"></div>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     MODAL: SETTINGS (RATES, JSON BACKUP, OPTIONAL AI KEY)
+     ========================================================================= -->
+<div id="settingsModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-4">
+  <div class="w-full max-w-md bg-[#161A20] text-white border border-white/10 rounded-3xl p-5 max-h-[85vh] overflow-y-auto anim-in">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-base font-bold">Настройки системы</h3>
+      <button id="closeSettingsBtn" class="text-white/50 p-1">✕</button>
+    </div>
+
+    <div class="p-3.5 rounded-2xl bg-black/35 border border-white/10 mb-3">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-bold">Курсы валют (автообновление)</span>
+        <button id="forceFetchRatesBtn" class="text-[11px] font-bold text-emerald">Обновить сейчас</button>
+      </div>
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="text-[10px] text-white/55">1 EUR (₴)</label>
+          <input id="setEurRate" class="inp-modal text-sm tabnum mt-1" inputmode="decimal">
+        </div>
+        <div>
+          <label class="text-[10px] text-white/55">1 USD (₴)</label>
+          <input id="setUsdRate" class="inp-modal text-sm tabnum mt-1" inputmode="decimal">
+        </div>
+      </div>
+      <div id="setRatesMeta" class="text-[10px] text-white/45 mt-1.5">Источник: НБУ</div>
+    </div>
+
+    <div class="p-3.5 rounded-2xl bg-black/35 border border-white/10 mb-3">
+      <div class="text-xs font-bold">Умный AI-парсер (опционально)</div>
+      <p class="text-[11px] text-white/55 mt-0.5 mb-2">Gemini API Key для свободного распознавания сложных фраз.</p>
+      <input id="setApiKey" type="password" class="inp-modal text-xs" placeholder="AIzaSy... (необязательно)">
+    </div>
+
+    <div class="p-3.5 rounded-2xl bg-black/35 border border-white/10 mb-3">
+      <div class="text-xs font-bold mb-2">Резервная копия данных</div>
+      <div class="grid grid-cols-2 gap-2">
+        <button id="exportJsonBtn" class="py-2.5 rounded-xl bg-white/10 text-xs font-bold">Экспорт JSON</button>
+        <button id="importJsonBtn" class="py-2.5 rounded-xl bg-white/10 text-xs font-bold">Импорт JSON</button>
+      </div>
+      <input id="importJsonFile" type="file" accept=".json,application/json" class="hidden">
+    </div>
+
+    <button id="resetAllBtn" class="w-full py-2.5 text-xs font-bold text-red">Сбросить все данные</button>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     TOAST NOTIFICATION
+     ========================================================================= -->
+<div id="toast" class="hidden fixed inset-x-0 z-[60] px-4 pointer-events-none" style="bottom: calc(env(safe-area-inset-bottom) + 144px)">
+  <div class="mx-auto max-w-md pointer-events-auto rounded-2xl bg-[#181A1F] text-white border border-white/15 px-4 py-2.5 shadow-2xl flex items-center justify-between gap-3 anim-in">
+    <span id="toastText" class="text-xs font-bold"></span>
+    <button id="toastUndoBtn" class="hidden text-xs font-bold text-emerald underline shrink-0">Отменить</button>
+  </div>
+</div>
+
+
+<script>
+(() => {
+'use strict';
+
+/* =====================================================================
+   1. CONSTANTS & CONFIG (SAME STORAGE KEY = SEAMLESS DATA PERSISTENCE)
+   ===================================================================== */
+const STORAGE_KEY = 'lifeos_v1_state';
+const WALLETS = ['cash', 'card', 'eur', 'usd'];
+const WALLET_META = {
+  cash: { name: 'Готівка', cur: 'UAH', sym: '₴', color: '#10B981' },
+  card: { name: 'Картка', cur: 'UAH', sym: '₴', color: '#34D399' },
+  eur:  { name: 'EUR',     cur: 'EUR', sym: '€', color: '#3B82F6' },
+  usd:  { name: 'USD',     cur: 'USD', sym: '$', color: '#F59E0B' }
+};
+
+const SKILLS = [
+  { id: 'nmt',     name: 'НМТ',     subtitle: 'Подготовка', color: '#3B82F6' },
+  { id: 'college', name: 'Колледж', subtitle: 'Учёба',      color: '#8B5CF6' },
+  { id: 'english', name: 'English', subtitle: 'Словарь',    color: '#06B6D4' },
+  { id: 'biz',     name: 'Бизнес',  subtitle: 'Проекты',    color: '#F59E0B' },
+  { id: 'sport',   name: 'Спорт',   subtitle: 'Тренировка', color: '#10B981' }
+];
+
+const EXPENSE_CATS = [
+  { id: 'food',      name: 'Еда',       icon: '☕', color: '#10B981' },
+  { id: 'transport', name: 'Транспорт', icon: '🚌', color: '#0EA5E9' },
+  { id: 'sport',     name: 'Спорт',     icon: '💪', color: '#EF4444' },
+  { id: 'fun',       name: 'Досуг',     icon: '🎬', color: '#EC4899' },
+  { id: 'tech',      name: 'Подписки',  icon: '⚡', color: '#8B5CF6' },
+  { id: 'home',      name: 'Быт',       icon: '🏠', color: '#F59E0B' },
+  { id: 'other',     name: 'Другое',    icon: '🧾', color: '#64748B' }
+];
+
+const INCOME_CATS = [
+  { id: 'biz_inc',   name: 'Доход',      icon: '💼', color: '#10B981' },
+  { id: 'gift',      name: 'Подарок',    icon: '🎁', color: '#3B82F6' },
+  { id: 'other_inc', name: 'Пополнение', icon: '⇄',  color: '#34D399' }
+];
+
+const IDEA_TAGS = ['Бизнес', 'Учёба', 'Проекты', 'Покупки'];
+
+/* =====================================================================
+   2. HELPERS & STATE MANAGEMENT
+   ===================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const round2 = n => Math.round(n * 100) / 100;
+const todayStr = () => new Date().toISOString().slice(0, 10);
+
+function parseNum(v) {
+  const s = String(v ?? '').trim().replace(/[\s\u00a0]/g, '').replace(',', '.');
+  if (!s) return null;
+  const n = Number(s);
+  return Number.isFinite(n) ? n : NaN;
+}
+
+function defaultState() {
+  return {
+    v: 1,
+    hiddenBalance: false,
+    apiKey: '',
+    rates: { EUR: 49.35, USD: 45.02, updatedAt: 0, source: 'НБУ' },
+    initial: { cash: 23339, card: 1715.29, eur: 100, usd: 21 },
+    goal: { name: '100 000 ₴', target: 100000 },
+    tx: [],
+    capitalHistory: [],
+    tasks: [
+      { id: uid(), title: 'Решить 30 задач по НМТ', skill: 'nmt', xp: 50, done: false, ts: Date.now() },
+      { id: uid(), title: 'Повторить 25 слов в Anki (English)', skill: 'english', xp: 25, done: false, ts: Date.now() },
+      { id: uid(), title: 'Турник + брусья (база)', skill: 'sport', xp: 50, done: false, ts: Date.now() }
+    ],
+    focusLogs: [],
+    timeline: [],
+    ideas: [
+      { id: uid(), text: 'Автоматизировать расчёт юнит-экономики для товаров', tag: 'Бизнес', ts: Date.now() }
+    ]
+  };
+}
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return defaultState();
+    return Object.assign(defaultState(), JSON.parse(raw));
+  } catch (e) {
+    return defaultState();
+  }
+}
+
+let S = loadState();
+
+function saveState() {
+  recordCapitalSnapshot();
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(S)); } catch (e) {}
+}
+
+function logEvent(icon, text, accent = '') {
+  S.timeline.unshift({ id: uid(), ts: Date.now(), icon, text, accent });
+  if (S.timeline.length > 80) S.timeline.length = 80;
+}
+
+/* =====================================================================
+   3. AUTOMATIC LIVE CURRENCY RATES (NBU + OPEN FX FALLBACKS)
+   ===================================================================== */
+async function fetchWithTimeout(url, ms = 4500) {
+  const ctrl = new AbortController();
+  const id = setTimeout(() => ctrl.abort(), ms);
+  try {
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(id);
+    return res;
+  } catch (e) {
+    clearTimeout(id);
+    throw e;
+  }
+}
+
+async function fetchLiveRates(manual = false) {
+  const dot = $('#rateStatusDot');
+  if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-amber animate-ping';
+
+  try {
+    const res = await fetchWithTimeout('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json', 4500);
+    if (res.ok) {
+      const data = await res.json();
+      const eurObj = data.find(x => x.cc === 'EUR');
+      const usdObj = data.find(x => x.cc === 'USD');
+      if (eurObj?.rate > 0 && usdObj?.rate > 0) {
+        S.rates.EUR = round2(eurObj.rate);
+        S.rates.USD = round2(usdObj.rate);
+        S.rates.updatedAt = Date.now();
+        S.rates.source = 'НБУ (авто)';
+        saveState();
+        renderCapital();
+        if (manual) showToast(`Курс НБУ: € ${S.rates.EUR} · $ ${S.rates.USD}`);
+        if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald';
+        return;
+      }
+    }
+  } catch (e) {}
+
+  try {
+    const res2 = await fetchWithTimeout('https://open.er-api.com/v6/latest/USD', 5000);
+    if (res2.ok) {
+      const d2 = await res2.json();
+      if (d2?.rates?.UAH && d2?.rates?.EUR) {
+        S.rates.USD = round2(d2.rates.UAH);
+        S.rates.EUR = round2(d2.rates.UAH / d2.rates.EUR);
+        S.rates.updatedAt = Date.now();
+        S.rates.source = 'OpenFX';
+        saveState();
+        renderCapital();
+        if (manual) showToast(`Курс обновлён: € ${S.rates.EUR} · $ ${S.rates.USD}`);
+        if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald';
+        return;
+      }
+    }
+  } catch (e) {}
+
+  if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald';
+}
+
+/* =====================================================================
+   4. FINANCIAL MATH & SPARKLINE
+   ===================================================================== */
+function getBalances() {
+  const b = { ...S.initial };
+  for (const t of S.tx) {
+    b[t.wallet] = round2((b[t.wallet] || 0) + (t.type === 'income' ? t.amount : -t.amount));
+  }
+  return b;
+}
+
+function walletToUAH(wallet, amount) {
+  const cur = WALLET_META[wallet].cur;
+  return cur === 'UAH' ? amount : amount * (S.rates[cur] || 1);
+}
+
+function getTotalCapitalUAH() {
+  const b = getBalances();
+  return round2(WALLETS.reduce((acc, w) => acc + walletToUAH(w, b[w]), 0));
+}
+
+function recordCapitalSnapshot() {
+  const d = todayStr();
+  const tot = getTotalCapitalUAH();
+  const idx = S.capitalHistory.findIndex(x => x.date === d);
+  if (idx >= 0) S.capitalHistory[idx].totalUAH = tot;
+  else S.capitalHistory.push({ date: d, totalUAH: tot });
+  if (S.capitalHistory.length > 90) S.capitalHistory = S.capitalHistory.slice(-90);
+}
+
+function fmtMoney(val, sym = '₴', decimals = false) {
+  const n = Math.abs(val) < 0.005 ? 0 : val;
+  const formatted = new Intl.NumberFormat('ru-RU', {
+    minimumFractionDigits: decimals ? 2 : 0,
+    maximumFractionDigits: decimals ? 2 : 0
+  }).format(n);
+  return sym ? `${formatted} ${sym}` : formatted;
+}
+
+/* =====================================================================
+   5. OMNI-BAR INTENT ROUTER
+   ===================================================================== */
+const AMOUNT_RX = /(?:^|[\s+\-−])(\d+(?:[.,]\d{1,2})?)\s*(?:к|k|тис|тыс)?(?=$|[\s.,!?₴$€a-zа-яіїє])/i;
+const EXPENSE_WORDS = /\b(мінус|минус|витрат|расход|потрат|купив|купил|заплатив|заплатил|оплат|взял|кофе|кава|шаурм|еда|їжа|продукт|обед|завтрак|ужин|такси|таксі|метро|проезд|проїзд|аптек|зал|тренировк|подписк|spotify|бензин)\b/i;
+const INCOME_WORDS = /\b(плюс|дохід|доход|заробив|заработал|пришло|надійшло|пополн|поповн|зарплат|стипенд|подарили|продал|продав)\b/i;
+
+function detectSkillFromText(t) {
+  if (/нмт|матем|истор|істор|укр\s*мов|тест/i.test(t)) return 'nmt';
+  if (/колледж|коледж|курс|экзам|экономик|статист|конспект|пара/i.test(t)) return 'college';
+  if (/англ|english|anki|слов|граммат/i.test(t)) return 'english';
+  if (/бизнес|бізнес|клиент|товар|продаж|реклам|бот|сайт/i.test(t)) return 'biz';
+  if (/турник|брус|трениров|зал|отжим|бег|рацион|ккал/i.test(t)) return 'sport';
+  return 'nmt';
+}
+
+function detectCategoryFromText(t, type) {
+  if (type === 'income') {
+    if (/подар|стипенд/i.test(t)) return 'gift';
+    if (/пополн|поповн|перевод/i.test(t)) return 'other_inc';
+    return 'biz_inc';
+  }
+  if (/кофе|кава|шаурм|еда|їжа|продукт|обед|завтрак|ужин|пицц|бургер|банан|творог|тунец/i.test(t)) return 'food';
+  if (/такси|таксі|метро|проезд|проїзд|маршрут|автобус|bolt|uklon/i.test(t)) return 'transport';
+  if (/зал|турник|аптек|лекар|омега|магн|спорт/i.test(t)) return 'sport';
+  if (/кино|кіно|игр|гуля|бар/i.test(t)) return 'fun';
+  if (/spotify|youtube|подписк|телефон|связь|интернет/i.test(t)) return 'tech';
+  if (/дом|дім|коммун|ремонт/i.test(t)) return 'home';
+  return 'other';
+}
+
+function detectWalletFromText(t) {
+  if (/€|євро|евро|eur\b/i.test(t)) return 'eur';
+  if (/\$|долар|доллар|бакс|usd\b/i.test(t)) return 'usd';
+  if (/карт|моно|приват|card/i.test(t)) return 'card';
+  if (/нал|готів|кеш|cash/i.test(t)) return 'cash';
+  return 'card';
+}
+
+function detectIdeaTag(t) {
+  if (/бизнес|бізнес|деньг|заработ|клиент|реклам|товар|магазин/i.test(t)) return 'Бизнес';
+  if (/нмт|учеб|учёб|колледж|книг|курс|англ/i.test(t)) return 'Учёба';
+  if (/купить|купити|macbook|телефон|кросс/i.test(t)) return 'Покупки';
+  return 'Проекты';
+}
+
+async function processOmniCommand(rawInput) {
+  const text = String(rawInput || '').trim();
+  if (!text) return;
+
+  const numMatch = text.match(AMOUNT_RX);
+  const hasMoneySignal = /^[+\-−]/.test(text) || EXPENSE_WORDS.test(text) || INCOME_WORDS.test(text) || /₴|\$|€|грн|евро|євро|дол|бакс/i.test(text);
+
+  if (numMatch && hasMoneySignal) {
+    let amount = parseFloat(numMatch[1].replace(',', '.'));
+    if (/(?:к|k|тис|тыс)(?=$|[\s.,!?])/i.test(numMatch[0])) amount *= 1000;
+    if (amount > 0 && amount < 1e8) {
+      const type = (/^\+/.test(text) || (INCOME_WORDS.test(text) && !EXPENSE_WORDS.test(text))) ? 'income' : 'expense';
+      const wallet = detectWalletFromText(text);
+      const category = detectCategoryFromText(text, type);
+      const cleanNote = text
+        .replace(/^[+\-−]\s*/, '')
+        .replace(numMatch[0], '')
+        .replace(/\b(грн|гривен|гривень|евро|євро|долларов|баксов|карта|картой|наличка|наличные|готівка|минус|мінус|плюс)\b/gi, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      const tx = addTransaction({
+        type, wallet, category, amount: round2(amount),
+        note: cleanNote ? cleanNote[0].toUpperCase() + cleanNote.slice(1) : ''
+      });
+      switchTab('viewCapital');
+      showToast(`${type === 'income' ? '+' : '−'}${fmtMoney(tx.amount, WALLET_META[tx.wallet].sym)}`, () => deleteTransaction(tx.id));
+      return;
+    }
+  }
+
+  const isActionTask = /^(сделать|зробити|решить|вирішити|выучить|вивчити|повторить|написать|купить|позвонить|подготовить|прочитать|потренироваться|сходить|закрыть|оплатить)\b/i.test(text)
+    || /\b(сегодня|сьогодні|завтра|срочно)\b/i.test(text);
+
+  if (isActionTask) {
+    const skill = detectSkillFromText(text);
+    addTask(text[0].toUpperCase() + text.slice(1), skill, 50);
+    switchTab('viewFocus');
+    showToast(`Задача добавлена (${SKILLS.find(s => s.id === skill).name})`);
+  } else {
+    addIdea(text[0].toUpperCase() + text.slice(1), detectIdeaTag(text));
+    switchTab('viewIdeas');
+    showToast('Идея сохранена');
+  }
+}
+
+/* =====================================================================
+   6. CRUD OPERATIONS
+   ===================================================================== */
+function addTask(title, skill = 'nmt', xp = 50) {
+  S.tasks.unshift({ id: uid(), title, skill, xp, done: false, ts: Date.now() });
+  logEvent('☑️', `Задача: ${title}`);
+  saveState();
+  renderFocus();
+}
+
+function toggleTask(id) {
+  const t = S.tasks.find(x => x.id === id);
+  if (!t) return;
+  t.done = !t.done;
+  t.doneTs = t.done ? Date.now() : null;
+  if (t.done) showToast(`+${t.xp} XP`);
+  saveState();
+  renderFocus();
+}
+
+function deleteTask(id) {
+  S.tasks = S.tasks.filter(x => x.id !== id);
+  saveState();
+  renderFocus();
+}
+
+function addTransaction({ type, wallet, category, amount, note }) {
+  const tx = { id: uid(), ts: Date.now(), type, wallet, category, amount: round2(amount), note: note || '' };
+  S.tx.unshift(tx);
+  saveState();
+  renderCapital();
+  return tx;
+}
+
+function updateTransaction(id, patch) {
+  const idx = S.tx.findIndex(x => x.id === id);
+  if (idx < 0) return;
+  S.tx[idx] = { ...S.tx[idx], ...patch, amount: round2(patch.amount) };
+  saveState();
+  renderCapital();
+}
+
+function deleteTransaction(id) {
+  S.tx = S.tx.filter(x => x.id !== id);
+  saveState();
+  renderCapital();
+}
+
+function addIdea(text, tag = 'Проекты') {
+  if (!text.trim()) return;
+  S.ideas.unshift({ id: uid(), text: text.trim(), tag, ts: Date.now() });
+  saveState();
+  renderIdeas();
+}
+
+function convertIdeaToTask(id) {
+  const idea = S.ideas.find(x => x.id === id);
+  if (!idea) return;
+  addTask(idea.text, detectSkillFromText(idea.text + ' ' + idea.tag), 50);
+  S.ideas = S.ideas.filter(x => x.id !== id);
+  saveState();
+  renderIdeas();
+  switchTab('viewFocus');
+  showToast('Перенесено в задачи на сегодня');
+}
+
+function deleteIdea(id) {
+  S.ideas = S.ideas.filter(x => x.id !== id);
+  saveState();
+  renderIdeas();
+}
+
+/* =====================================================================
+   7. FOCUS TIMER & XP
+   ===================================================================== */
+const Timer = {
+  durationMin: 25,
+  remainingSec: 25 * 60,
+  running: false,
+  skillIdx: 0,
+  intervalId: null
+};
+
+function currentSkillObj() {
+  return SKILLS[Timer.skillIdx % SKILLS.length];
+}
+
+function setTimerDuration(min) {
+  if (Timer.running) return;
+  Timer.durationMin = min;
+  Timer.remainingSec = min * 60;
+  $$('.dur-btn').forEach(b => {
+    const active = Number(b.dataset.dur) === min;
+    b.className = `dur-btn px-2 py-0.5 rounded-md text-[11px] font-semibold ${active ? 'bg-white/15 text-white' : 'text-white/45 hover:text-white'}`;
+  });
+  updateTimerUI();
+}
+
+function toggleTimer() {
+  if (Timer.running) {
+    clearInterval(Timer.intervalId);
+    Timer.running = false;
+  } else {
+    Timer.running = true;
+    Timer.intervalId = setInterval(() => {
+      Timer.remainingSec--;
+      if (Timer.remainingSec <= 0) completeFocusSession();
+      else updateTimerUI();
+    }, 1000);
+  }
+  updateTimerUI();
+}
+
+function resetTimer() {
+  clearInterval(Timer.intervalId);
+  Timer.running = false;
+  Timer.remainingSec = Timer.durationMin * 60;
+  updateTimerUI();
+}
+
+function completeFocusSession() {
+  clearInterval(Timer.intervalId);
+  Timer.running = false;
+  const mins = Timer.durationMin;
+  const xp = mins * 2;
+  const sk = currentSkillObj();
+  S.focusLogs.unshift({ id: uid(), ts: Date.now(), minutes: mins, skill: sk.id, xp });
+  Timer.remainingSec = Timer.durationMin * 60;
+  saveState();
+  renderFocus();
+  showToast(`+${xp} XP (${sk.name})`);
+}
+
+function updateTimerUI() {
+  const m = String(Math.floor(Timer.remainingSec / 60)).padStart(2, '0');
+  const s = String(Timer.remainingSec % 60).padStart(2, '0');
+  $('#timerDisplay').textContent = `${m}:${s}`;
+  $('#timerPlayIcon').classList.toggle('hidden', Timer.running);
+  $('#timerPauseIcon').classList.toggle('hidden', !Timer.running);
+  $('#timerDot').className = `w-2.5 h-2.5 rounded-full ${Timer.running ? 'bg-emerald animate-ping' : 'bg-blue'}`;
+  $('#timerResetBtn').classList.toggle('hidden', !Timer.running && Timer.remainingSec === Timer.durationMin * 60);
+  const sk = currentSkillObj();
+  $('#focusSkillLabel').textContent = `${sk.name} • ${sk.subtitle}`;
+}
+
+function calculateXPStats() {
+  let totalXP = 0, todayXP = 0, todayFocusMin = 0;
+  const today = todayStr();
+  for (const t of S.tasks) {
+    if (t.done) {
+      totalXP += t.xp;
+      if (t.doneTs && new Date(t.doneTs).toISOString().slice(0, 10) === today) todayXP += t.xp;
+    }
+  }
+  for (const f of S.focusLogs) {
+    totalXP += f.xp;
+    if (new Date(f.ts).toISOString().slice(0, 10) === today) {
+      todayXP += f.xp;
+      todayFocusMin += f.minutes;
+    }
+  }
+  const xpPerLevel = 500;
+  const level = Math.floor(totalXP / xpPerLevel) + 1;
+  const currentLvlXP = totalXP % xpPerLevel;
+  return { totalXP, todayXP, todayFocusMin, level, currentLvlXP, xpPerLevel };
+}
+
+/* =====================================================================
+   8. RENDERING VIEWS
+   ===================================================================== */
+let activeTab = 'viewFocus';
+let ideaFilter = 'Все';
+let showAllTx = false;
+
+function switchTab(id) {
+  activeTab = id;
+  $$('.tab-view').forEach(el => el.classList.toggle('hidden', el.id !== id));
+  $$('.nav-btn').forEach(btn => btn.setAttribute('aria-selected', String(btn.dataset.target === id)));
+
+  const isDark = id === 'viewCapital';
+  document.body.classList.toggle('dark-mode', isDark);
+  const nav = $('#bottomNav');
+  nav.classList.toggle('nav-dark', isDark);
+  nav.classList.toggle('nav-light', !isDark);
+
+  window.scrollTo(0, 0);
+}
+
+function updateClock() {
+  const now = new Date();
+  $('#focusClock').textContent = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  const dateStr = now.toLocaleDateString('ru-RU', { weekday: 'short', day: 'numeric', month: 'long' });
+  $('#focusDate').textContent = dateStr[0].toUpperCase() + dateStr.slice(1);
+}
+
+function renderFocus() {
+  updateClock();
+  updateTimerUI();
+  const stats = calculateXPStats();
+  $('#focusTodayMinutes').textContent = `· ${stats.todayFocusMin} мин`;
+
+  const doneCount = S.tasks.filter(t => t.done).length;
+  $('#tasksCounter').textContent = `${doneCount} / ${S.tasks.length}`;
+  const tasksBox = $('#tasksList');
+  if (!S.tasks.length) {
+    tasksBox.innerHTML = `<div class="py-6 text-center text-xs text-[#6B7280]">Задач на сегодня нет. Нажми «+» или скажи внизу.</div>`;
+  } else {
+    tasksBox.innerHTML = S.tasks.map(t => `
+      <div class="py-3 flex items-center gap-3">
+        <button type="button" data-toggle-task="${esc(t.id)}" class="w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition ${t.done ? 'bg-blue border-blue text-white' : 'border-[#9CA3AF] bg-white/60'}">
+          ${t.done ? '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>' : ''}
+        </button>
+        <div class="flex-1 min-w-0 cursor-pointer" data-toggle-task="${esc(t.id)}">
+          <div class="text-[14px] font-medium truncate ${t.done ? 'line-through text-[#9CA3AF]' : 'text-[#111318]'}">${esc(t.title)}</div>
+        </div>
+        <span class="text-xs font-bold text-blue tabnum shrink-0">+${t.xp} XP</span>
+        <button type="button" data-del-task="${esc(t.id)}" class="text-[#9CA3AF] hover:text-red text-xs px-1">✕</button>
+      </div>
+    `).join('');
+  }
+
+  $('#lvlBadgeNum').textContent = stats.level;
+  $('#lvlTitle').textContent = `LVL ${stats.level}`;
+  $('#xpProgressText').textContent = `${stats.currentLvlXP} / ${stats.xpPerLevel} XP`;
+  $('#xpTodayGain').textContent = `+${stats.todayXP} XP`;
+  const pct = Math.max(6, Math.round((stats.currentLvlXP / stats.xpPerLevel) * 100));
+  $('#xpBar').style.width = `${pct}%`;
+  $('#lvlMiniRing').style.strokeDashoffset = (88 - (88 * pct) / 100).toFixed(1);
+}
+
+function renderSparkline() {
+  const box = $('#sparklineBox');
+  const pts = S.capitalHistory.slice(-14).map(x => x.totalUAH);
+  if (pts.length < 2) {
+    const cur = getTotalCapitalUAH();
+    pts.unshift(cur * 0.93, cur * 0.96, cur * 0.95, cur * 0.98, cur * 0.97, cur);
+  }
+  const min = Math.min(...pts) * 0.985;
+  const max = Math.max(...pts) * 1.015 || 1;
+  const w = 360, h = 92;
+  const coords = pts.map((v, i) => {
+    const x = (i / (pts.length - 1)) * (w - 14);
+    const y = h - ((v - min) / (max - min || 1)) * (h - 22) - 10;
+    return [x, y];
+  });
+  const polyStr = coords.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+  const last = coords[coords.length - 1];
+  box.innerHTML = `
+    <svg viewBox="0 0 ${w} ${h}" class="w-full h-full overflow-visible" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="refCapGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#10B981" stop-opacity="0.28"/>
+          <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <polygon points="0,${h} ${polyStr} ${last[0].toFixed(1)},${h}" fill="url(#refCapGrad)"/>
+      <line x1="${last[0].toFixed(1)}" y1="6" x2="${last[0].toFixed(1)}" y2="${h}" stroke="rgba(255,255,255,0.16)" stroke-width="1"/>
+      <polyline points="${polyStr}" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="4" fill="#38BDF8" stroke="#0B0D10" stroke-width="1.5"/>
+    </svg>
+  `;
+}
+
+function renderCapital() {
+  const b = getBalances();
+  const totalUAH = getTotalCapitalUAH();
+  const uahCombined = round2((b.cash || 0) + (b.card || 0));
+
+  $('#totalCapitalDisplay').textContent = S.hiddenBalance ? '•••••• ₴' : fmtMoney(totalUAH, '₴', false);
+  $('#ratesBadge').textContent = `€ ${S.rates.EUR} · $ ${S.rates.USD}`;
+  $('#ratesUpdatedTime').textContent = `· ${S.rates.source || 'НБУ'}`;
+
+  const weekAgo = Date.now() - 7 * 86400 * 1000;
+  let net7d = 0;
+  for (const t of S.tx) {
+    if (t.ts >= weekAgo) {
+      const u = walletToUAH(t.wallet, t.amount);
+      net7d += (t.type === 'income' ? u : -u);
+    }
+  }
+  const base = Math.max(1, totalUAH - net7d);
+  const pctWeek = ((net7d / base) * 100).toFixed(1);
+  const trendEl = $('#capitalTrendBadge');
+  trendEl.textContent = `${net7d >= 0 ? '↑ +' : '↓ '}${pctWeek}% за неделю`;
+  trendEl.className = `text-[13px] font-semibold tabnum ${net7d >= 0 ? 'text-emerald' : 'text-red'}`;
+
+  renderSparkline();
+
+  $('#tileUahVal').textContent = S.hiddenBalance ? '••••' : fmtMoney(uahCombined, '', false);
+  $('#tileEurVal').textContent = S.hiddenBalance ? '•••' : fmtMoney(b.eur, '', false);
+  $('#tileUsdVal').textContent = S.hiddenBalance ? '•••' : fmtMoney(b.usd, '', false);
+  $('#modalCashVal').textContent = fmtMoney(b.cash, '₴', false);
+  $('#modalCardVal').textContent = fmtMoney(b.card, '₴', true);
+
+  const target = S.goal.target || 100000;
+  const pct = Math.min(100, Math.max(0, (totalUAH / target) * 100));
+  $('#goalNameDisplay').textContent = `Цель: ${S.goal.name || fmtMoney(target, '₴')}`;
+  $('#goalNumbersDisplay').textContent = S.hiddenBalance ? '•••• / ••••' : `${fmtMoney(Math.max(0, totalUAH), '', false)} / ${fmtMoney(target, '₴', false)}`;
+  $('#goalPctDisplay').textContent = `${pct.toFixed(1)}%`;
+  $('#goalLinearBar').style.width = `${pct}%`;
+  const circ = 119.3;
+  $('#goalRingCircle').style.strokeDashoffset = (circ - (circ * pct) / 100).toFixed(1);
+
+  const txBox = $('#txList');
+  if (!S.tx.length) {
+    txBox.innerHTML = `<div class="py-4 text-center text-xs text-white/45">Операций пока нет. Скажи «-150 кофе» внизу.</div>`;
+  } else {
+    const allCats = [...EXPENSE_CATS, ...INCOME_CATS];
+    const slice = showAllTx ? S.tx : S.tx.slice(0, 6);
+    txBox.innerHTML = slice.map(t => {
+      const cat = allCats.find(c => c.id === t.category) || { name: 'Операция', icon: '🧾' };
+      const wMeta = WALLET_META[t.wallet];
+      const dt = new Date(t.ts);
+      const isToday = dt.toISOString().slice(0, 10) === todayStr();
+      const timeStr = (isToday ? 'Сегодня, ' : dt.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' }) + ', ')
+        + dt.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+      return `
+        <div data-edit-tx="${esc(t.id)}" class="flex items-center gap-3 py-1 cursor-pointer active:opacity-75">
+          <div class="w-10 h-10 rounded-full bg-white/[0.08] grid place-items-center text-base shrink-0">${cat.icon}</div>
+          <div class="flex-1 min-w-0">
+            <div class="text-[14px] font-semibold text-white truncate">${esc(t.note || cat.name)}</div>
+            <div class="text-[11px] text-white/45 truncate">${esc(wMeta.name)} · ${timeStr}</div>
+          </div>
+          <div class="text-[14px] font-bold tabnum shrink-0 ${t.type === 'income' ? 'text-emerald' : 'text-red'}">
+            ${t.type === 'income' ? '+' : '−'}${fmtMoney(t.amount, wMeta.sym, wMeta.cur !== 'UAH')}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function renderIdeas() {
+  $('#ideasTotalBadge').textContent = `${S.ideas.length}`;
+  $('#ideasCountRight').textContent = `${S.ideas.length}`;
+
+  const tags = ['Бизнес', 'Учёба', 'Проекты'];
+  $('#ideaTagChips').innerHTML = `
+    <button type="button" data-itag="Все" class="light-chip" aria-pressed="${ideaFilter === 'Все'}">Все</button>
+    ${tags.map(tg => `<button type="button" data-itag="${tg}" class="light-chip" aria-pressed="${ideaFilter === tg}">${tg}</button>`).join('')}
+    <button type="button" id="focusQuickIdeaBtn" class="w-7 h-7 rounded-full bg-[#E2E5EB] text-[#111318] grid place-items-center text-sm font-bold shrink-0">+</button>
+  `;
+
+  const filtered = ideaFilter === 'Все' ? S.ideas : S.ideas.filter(i => i.tag === ideaFilter);
+  const box = $('#ideasList');
+  if (!filtered.length) {
+    box.innerHTML = `<div class="py-6 text-center text-xs text-[#6B7280]">Идей пока нет. Закинь мысль в строку выше.</div>`;
+    return;
+  }
+
+  const dotColors = { 'Бизнес': '#3B82F6', 'Учёба': '#F59E0B', 'Проекты': '#8B5CF6', 'Покупки': '#10B981' };
+  box.innerHTML = filtered.map(i => `
+    <div class="light-card rounded-2xl px-4 py-3.5 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0 flex-1">
+        <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:${dotColors[i.tag] || '#3B82F6'}"></span>
+        <div class="text-[13px] font-semibold text-[#111318] leading-snug break-words">${esc(i.text)}</div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button type="button" data-idea-to-task="${esc(i.id)}" class="text-xs font-bold text-blue px-2 py-1 rounded-lg bg-blue/10" title="В задачу">В план ›</button>
+        <button type="button" data-del-idea="${esc(i.id)}" class="text-[#9CA3AF] hover:text-red text-xs px-1">✕</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAll() {
+  renderFocus();
+  renderCapital();
+  renderIdeas();
+}
+
+/* =====================================================================
+   9. INTERACTIONS & MODALS
+   ===================================================================== */
+let toastTimer = null;
+function showToast(msg, undoFn = null) {
+  $('#toastText').textContent = msg;
+  const btn = $('#toastUndoBtn');
+  if (undoFn) {
+    btn.classList.remove('hidden');
+    btn.onclick = () => { $('#toast').classList.add('hidden'); undoFn(); };
+  } else {
+    btn.classList.add('hidden');
+  }
+  $('#toast').classList.remove('hidden');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $('#toast').classList.add('hidden'), undoFn ? 4200 : 2400);
+}
+
+$$('.nav-btn').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.target)));
+$$('.dur-btn').forEach(btn => btn.addEventListener('click', () => setTimerDuration(Number(btn.dataset.dur))));
+$('#timerToggleBtn').addEventListener('click', toggleTimer);
+$('#timerResetBtn').addEventListener('click', resetTimer);
+$('#cycleFocusSkillBtn').addEventListener('click', () => {
+  Timer.skillIdx = (Timer.skillIdx + 1) % SKILLS.length;
+  updateTimerUI();
+});
+
+$('#tasksList').addEventListener('click', e => {
+  const tog = e.target.closest('[data-toggle-task]');
+  if (tog) { toggleTask(tog.dataset.toggleTask); return; }
+  const del = e.target.closest('[data-del-task]');
+  if (del) deleteTask(del.dataset.delTask);
+});
+
+let newTaskSkill = 'nmt', newTaskXP = 50;
+$('#openAddTaskModal').addEventListener('click', () => {
+  $('#tmTitleInp').value = '';
+  $('#tmSkillChips').innerHTML = SKILLS.map(s => `<button type="button" data-tms="${s.id}" class="px-3 py-1 rounded-full text-xs font-semibold ${newTaskSkill === s.id ? 'bg-blue text-white' : 'bg-white/10 text-white/70'}">${s.name}</button>`).join('');
+  $('#taskModal').classList.remove('hidden');
+  setTimeout(() => $('#tmTitleInp').focus(), 50);
+});
+$('#closeTmBtn').addEventListener('click', () => $('#taskModal').classList.add('hidden'));
+$('#tmSkillChips').addEventListener('click', e => {
+  const b = e.target.closest('[data-tms]');
+  if (!b) return;
+  newTaskSkill = b.dataset.tms;
+  $$('#tmSkillChips button').forEach(x => x.className = `px-3 py-1 rounded-full text-xs font-semibold ${x.dataset.tms === newTaskSkill ? 'bg-blue text-white' : 'bg-white/10 text-white/70'}`);
+});
+$('#tmXpChips').addEventListener('click', e => {
+  const b = e.target.closest('[data-xp]');
+  if (!b) return;
+  newTaskXP = Number(b.dataset.xp);
+  $$('#tmXpChips button').forEach(x => x.className = `px-3 py-1 rounded-full text-xs font-semibold ${Number(x.dataset.xp) === newTaskXP ? 'bg-blue text-white' : 'bg-white/10 text-white/70'}`);
+});
+$('#saveTmBtn').addEventListener('click', () => {
+  const v = $('#tmTitleInp').value.trim();
+  if (!v) return;
+  addTask(v, newTaskSkill, newTaskXP);
+  $('#taskModal').classList.add('hidden');
+});
+
+/* Capital Interactions */
+$('#toggleHideBalance').addEventListener('click', () => { S.hiddenBalance = !S.hiddenBalance; saveState(); renderCapital(); });
+$('#refreshRatesBtn').addEventListener('click', () => fetchLiveRates(true));
+$('#toggleAllTxBtn').addEventListener('click', () => { showAllTx = !showAllTx; $('#toggleAllTxBtn').textContent = showAllTx ? 'Свернуть' : 'Все →'; renderCapital(); });
+
+$('#tileUahBtn').addEventListener('click', () => $('#uahWalletsModal').classList.remove('hidden'));
+$('#closeUahModalBtn').addEventListener('click', () => $('#uahWalletsModal').classList.add('hidden'));
+
+let editingWalletId = null;
+function openWalletEditor(wid) {
+  editingWalletId = wid;
+  const meta = WALLET_META[wid];
+  $('#wmTitle').textContent = `Счёт: ${meta.name}`;
+  $('#wmCurUnit').textContent = meta.sym;
+  $('#wmAmountInp').value = getBalances()[wid];
+  $('#uahWalletsModal').classList.add('hidden');
+  $('#walletModal').classList.remove('hidden');
+  setTimeout(() => $('#wmAmountInp').focus(), 50);
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-edit-wallet]');
+  if (b) openWalletEditor(b.dataset.editWallet);
+});
+$('#closeWmBtn').addEventListener('click', () => $('#walletModal').classList.add('hidden'));
+$('#cancelWmBtn').addEventListener('click', () => $('#walletModal').classList.add('hidden'));
+$('#saveWmBtn').addEventListener('click', () => {
+  if (!editingWalletId) return;
+  const val = parseNum($('#wmAmountInp').value);
+  if (!Number.isFinite(val)) return;
+  const diff = round2(val - getBalances()[editingWalletId]);
+  S.initial[editingWalletId] = round2((S.initial[editingWalletId] || 0) + diff);
+  saveState();
+  renderCapital();
+  $('#walletModal').classList.add('hidden');
+  showToast('Остаток обновлён');
+});
+
+$('#editGoalModalBtn').addEventListener('click', () => {
+  $('#gmNameInp').value = S.goal.name || '';
+  $('#gmTargetInp').value = S.goal.target || 100000;
+  $('#goalModal').classList.remove('hidden');
+});
+$('#closeGmBtn').addEventListener('click', () => $('#goalModal').classList.add('hidden'));
+$('#cancelGmBtn').addEventListener('click', () => $('#goalModal').classList.add('hidden'));
+$('#saveGmBtn').addEventListener('click', () => {
+  const t = parseNum($('#gmTargetInp').value);
+  if (!(t > 0)) return;
+  S.goal = { name: $('#gmNameInp').value.trim() || fmtMoney(t, '₴'), target: round2(t) };
+  saveState();
+  renderCapital();
+  $('#goalModal').classList.add('hidden');
+});
+
+/* Transaction Modal */
+const TxForm = { editId: null, type: 'expense', wallet: 'card', category: 'food' };
+function renderTxModalForm() {
+  $('#txModalTitle').textContent = TxForm.editId ? 'Редактировать' : 'Новая операция';
+  $('#deleteTxBtn').classList.toggle('hidden', !TxForm.editId);
+
+  $$('.tx-type-btn').forEach(b => {
+    const isExp = b.dataset.txtype === 'expense';
+    const active = b.dataset.txtype === TxForm.type;
+    b.className = `tx-type-btn py-2 rounded-lg text-xs font-bold ${active ? (isExp ? 'bg-red/20 text-red' : 'bg-emerald/20 text-emerald') : 'text-white/50'}`;
+  });
+
+  $('#modalWalletChips').innerHTML = WALLETS.map(w => `
+    <button type="button" data-mw="${w}" class="py-1.5 rounded-xl text-[11px] font-bold ${TxForm.wallet === w ? 'bg-emerald text-[#06281E]' : 'bg-white/10 text-white/70'}">
+      ${WALLET_META[w].name}
+    </button>
+  `).join('');
+
+  const cats = TxForm.type === 'income' ? INCOME_CATS : EXPENSE_CATS;
+  if (!cats.some(c => c.id === TxForm.category)) TxForm.category = cats[0].id;
+  $('#modalCatChips').innerHTML = cats.map(c => `
+    <button type="button" data-mc="${c.id}" class="px-2.5 py-1 rounded-full text-[11px] font-semibold ${TxForm.category === c.id ? 'bg-white text-[#111318]' : 'bg-white/10 text-white/75'}">
+      ${c.icon} ${c.name}
+    </button>
+  `).join('');
+
+  $('#txCurUnit').textContent = WALLET_META[TxForm.wallet].sym;
+}
+
+function openTxModal(tx = null) {
+  if (tx) {
+    TxForm.editId = tx.id; TxForm.type = tx.type; TxForm.wallet = tx.wallet; TxForm.category = tx.category;
+    $('#txAmountInp').value = tx.amount;
+    $('#txNoteInp').value = tx.note;
+  } else {
+    TxForm.editId = null; TxForm.type = 'expense'; TxForm.wallet = 'card'; TxForm.category = 'food';
+    $('#txAmountInp').value = ''; $('#txNoteInp').value = '';
+  }
+  renderTxModalForm();
+  $('#txModal').classList.remove('hidden');
+  setTimeout(() => $('#txAmountInp').focus(), 50);
+}
+
+$('#openAddTxModal').addEventListener('click', () => openTxModal(null));
+$('#txList').addEventListener('click', e => {
+  const row = e.target.closest('[data-edit-tx]');
+  if (row) { const tx = S.tx.find(x => x.id === row.dataset.editTx); if (tx) openTxModal(tx); }
+});
+$('#closeTxModal').addEventListener('click', () => $('#txModal').classList.add('hidden'));
+$$('.tx-type-btn').forEach(b => b.addEventListener('click', () => { TxForm.type = b.dataset.txtype; renderTxModalForm(); }));
+$('#modalWalletChips').addEventListener('click', e => { const b = e.target.closest('[data-mw]'); if (b) { TxForm.wallet = b.dataset.mw; renderTxModalForm(); } });
+$('#modalCatChips').addEventListener('click', e => { const b = e.target.closest('[data-mc]'); if (b) { TxForm.category = b.dataset.mc; renderTxModalForm(); } });
+
+$('#saveTxBtn').addEventListener('click', () => {
+  const amt = parseNum($('#txAmountInp').value);
+  if (!(amt > 0)) { showToast('Введи сумму'); return; }
+  const payload = { type: TxForm.type, wallet: TxForm.wallet, category: TxForm.category, amount: amt, note: $('#txNoteInp').value.trim() };
+  if (TxForm.editId) { updateTransaction(TxForm.editId, payload); showToast('Обновлено'); }
+  else { const tx = addTransaction(payload); showToast(`${tx.type === 'income' ? '+' : '−'}${fmtMoney(tx.amount, WALLET_META[tx.wallet].sym)}`, () => deleteTransaction(tx.id)); }
+  $('#txModal').classList.add('hidden');
+});
+$('#deleteTxBtn').addEventListener('click', () => { if (TxForm.editId) { deleteTransaction(TxForm.editId); $('#txModal').classList.add('hidden'); } });
+
+/* Ideas Interactions */
+$('#quickIdeaAddBtn').addEventListener('click', () => {
+  const v = $('#quickIdeaInput').value.trim();
+  if (!v) return;
+  addIdea(v, ideaFilter === 'Все' ? detectIdeaTag(v) : ideaFilter);
+  $('#quickIdeaInput').value = '';
+  showToast('Идея добавлена');
+});
+$('#quickIdeaInput').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#quickIdeaAddBtn').click(); } });
+$('#ideaTagChips').addEventListener('click', e => {
+  if (e.target.closest('#focusQuickIdeaBtn')) { $('#quickIdeaInput').focus(); return; }
+  const b = e.target.closest('[data-itag]');
+  if (b) { ideaFilter = b.dataset.itag; renderIdeas(); }
+});
+$('#ideasList').addEventListener('click', e => {
+  const conv = e.target.closest('[data-idea-to-task]');
+  if (conv) { convertIdeaToTask(conv.dataset.ideaToTask); return; }
+  const del = e.target.closest('[data-del-idea]');
+  if (del) deleteIdea(del.dataset.delIdea);
+});
+$$('[data-qa]').forEach(btn => btn.addEventListener('click', () => {
+  const type = btn.dataset.qa;
+  if (type === 'task') $('#openAddTaskModal').click();
+  else if (type === 'note') { ideaFilter = 'Учёба'; renderIdeas(); $('#quickIdeaInput').focus(); }
+  else { ideaFilter = 'Проекты'; renderIdeas(); $('#quickIdeaInput').focus(); }
+}));
+
+/* Analytics & Settings */
+function openAnalytics() {
+  const weekAgo = Date.now() - 7 * 86400 * 1000;
+  const monthAgo = Date.now() - 30 * 86400 * 1000;
+  const focusMin = S.focusLogs.filter(f => f.ts >= weekAgo).reduce((a, b) => a + b.minutes, 0);
+  const tasksDone = S.tasks.filter(t => t.done && (t.doneTs || t.ts) >= weekAgo).length;
+  let net = 0;
+  for (const t of S.tx) if (t.ts >= weekAgo) net += (t.type === 'income' ? 1 : -1) * walletToUAH(t.wallet, t.amount);
+  $('#wrFocusHrs').textContent = `${(focusMin / 60).toFixed(1)} ч`;
+  $('#wrTasksDone').textContent = tasksDone;
+  $('#wrNetMoney').textContent = `${net >= 0 ? '+' : '−'}${fmtMoney(Math.abs(net), '₴')}`;
+
+  const byCat = {}; let totExp = 0;
+  for (const t of S.tx) if (t.type === 'expense' && t.ts >= monthAgo) { const u = walletToUAH(t.wallet, t.amount); byCat[t.category] = (byCat[t.category] || 0) + u; totExp += u; }
+  const box = $('#catBreakdownBox');
+  if (!totExp) box.innerHTML = `<div class="text-xs text-white/45">Расходов за 30 дней нет.</div>`;
+  else box.innerHTML = Object.entries(byCat).sort((a, b) => b[1] - a[1]).map(([cid, val]) => {
+    const c = EXPENSE_CATS.find(x => x.id === cid) || { name: 'Другое', icon: '🧾', color: '#64748B' };
+    const p = Math.round((val / totExp) * 100);
+    return `<div><div class="flex justify-between text-xs mb-1"><span>${c.icon} ${c.name}</span><span class="font-bold tabnum">${fmtMoney(val, '₴')} (${p}%)</span></div><div class="w-full h-1.5 rounded-full bg-white/10"><div class="h-full rounded-full" style="width:${p}%;background:${c.color}"></div></div></div>`;
+  }).join('');
+  $('#analyticsModal').classList.remove('hidden');
+}
+$('#openStatsBtn').addEventListener('click', openAnalytics);
+$('#openFinanceStatsBtn').addEventListener('click', openAnalytics);
+$('#closeAnalyticsBtn').addEventListener('click', () => $('#analyticsModal').classList.add('hidden'));
+
+$('#openSettingsBtn').addEventListener('click', () => {
+  $('#setEurRate').value = S.rates.EUR;
+  $('#setUsdRate').value = S.rates.USD;
+  $('#setApiKey').value = S.apiKey || '';
+  $('#settingsModal').classList.remove('hidden');
+});
+$('#closeSettingsBtn').addEventListener('click', () => $('#settingsModal').classList.add('hidden'));
+$('#forceFetchRatesBtn').addEventListener('click', async () => { await fetchLiveRates(true); $('#setEurRate').value = S.rates.EUR; $('#setUsdRate').value = S.rates.USD; });
+$('#setEurRate').addEventListener('input', e => { const n = parseNum(e.target.value); if (n > 0) { S.rates.EUR = n; saveState(); renderCapital(); } });
+$('#setUsdRate').addEventListener('input', e => { const n = parseNum(e.target.value); if (n > 0) { S.rates.USD = n; saveState(); renderCapital(); } });
+$('#setApiKey').addEventListener('input', e => { S.apiKey = e.target.value.trim(); saveState(); });
+
+$('#exportJsonBtn').addEventListener('click', () => {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }));
+  a.download = `lifeos-backup-${todayStr()}.json`;
+  document.body.appendChild(a); a.click(); a.remove();
+});
+$('#importJsonBtn').addEventListener('click', () => $('#importJsonFile').click());
+$('#importJsonFile').addEventListener('change', e => {
+  const f = e.target.files?.[0]; e.target.value = ''; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const p = JSON.parse(r.result);
+      if (!p || !p.initial) throw new Error();
+      S = Object.assign(defaultState(), p);
+      saveState(); renderAll(); $('#settingsModal').classList.add('hidden');
+      showToast('Бэкап восстановлен');
+    } catch (err) { showToast('Ошибка файла JSON'); }
+  };
+  r.readAsText(f);
+});
+$('#resetAllBtn').addEventListener('click', () => {
+  if (!confirm('Сбросить все данные?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  S = defaultState(); saveState(); renderAll(); $('#settingsModal').classList.add('hidden');
+});
+
+/* Omni-bar & Voice */
+$('#omniSendBtn').addEventListener('click', () => {
+  const v = $('#omniInput').value.trim();
+  if (!v) return;
+  $('#omniInput').value = '';
+  processOmniCommand(v);
+});
+$('#omniInput').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('#omniSendBtn').click(); } });
+
+let recognition = null, isListening = false;
+function startVoice() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { showToast('Введи текстом в строку'); $('#omniInput').focus(); return; }
+  if (isListening && recognition) { recognition.stop(); return; }
+  recognition = new SR();
+  recognition.lang = 'ru-RU';
+  recognition.interimResults = true;
+  recognition.onstart = () => { isListening = true; $('#omniMicBtn').classList.add('mic-active'); $('#omniInput').placeholder = 'Слушаю...'; };
+  recognition.onresult = e => { let t = ''; for (let i = 0; i < e.results.length; i++) t += e.results[i][0].transcript; $('#omniInput').value = t; };
+  recognition.onend = () => {
+    isListening = false; $('#omniMicBtn').classList.remove('mic-active'); $('#omniInput').placeholder = 'Говори или пиши...';
+    const v = $('#omniInput').value.trim();
+    if (v) { $('#omniInput').value = ''; processOmniCommand(v); }
+  };
+  try { recognition.start(); } catch (e) {}
+}
+$('#omniMicBtn').addEventListener('click', startVoice);
+$('#ideaInlineMicBtn').addEventListener('click', startVoice);
+
+/* Bootstrap */
+renderAll();
+setInterval(updateClock, 15000);
+fetchLiveRates(false);
+})();
+</script>
+</body>
+</html>
